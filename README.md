@@ -22,3 +22,7 @@ My Ubuntu dotfiles.
   - IntelliJ IDEA Ultimate 2021.1.3
   - PyCharm Professional 2021.1.3
   - RubyMine 2021.2.3
+
+## Firefox addons
+- KeePassXC Web
+- FirefoxPWA
