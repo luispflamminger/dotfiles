@@ -26,3 +26,5 @@ My Ubuntu dotfiles.
 ## Firefox addons
 - KeePassXC Web
 - FirefoxPWA
+  - Outlook PWA
+  - Gmail PWA
