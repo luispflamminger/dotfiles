@@ -81,4 +81,16 @@ return {
         "saadparwaiz1/cmp_luasnip",
         dependencies = { "L3MON4D3/LuaSnip" },
     },
+    {
+        "github/copilot.vim",
+        init = function()
+            vim.g.copilot_no_tab_map = true
+            vim.keymap.set('i', '<S-tab>', 'copilot#Accept("")', {
+                expr = true,
+                replace_keycodes = false
+            })
+            vim.keymap.set('i', '<C-S-N>', '<Plug>(copilot-next)')
+            vim.keymap.set('i', '<C-S-P>', '<Plug>(copilot-previous)')
+        end,
+    },
 }
