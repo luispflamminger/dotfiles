@@ -1,5 +1,7 @@
 -- all plugins related to lsp setup
 
+-- global state to keep track of whether we should format on the next save
+vim.g.format_on_save = true
 local function jdtls_config()
     local jdtls_mason_path = "/home/luisp/.local/share/nvim/mason/bin/jdtls"
     local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
@@ -32,7 +34,7 @@ end
 
 local function nvim_lsp_config()
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
-    -- lua
+
     require("lspconfig").lua_ls.setup({
         capabilities = capabilities,
         -- i  have no idea what this does, but it configures the lua lsp to work with neovim
@@ -49,12 +51,6 @@ local function nvim_lsp_config()
                             -- Make the server aware of Neovim runtime files
                             workspace = {
                                 checkThirdParty = false,
-                                -- library = {
-                                --     vim.env.VIMRUNTIME
-                                --     -- "${3rd}/luv/library"
-                                --     -- "${3rd}/busted/library",
-                                -- }
-                                -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
                                 library = vim.api.nvim_get_runtime_file("", true)
                             }
                         }
@@ -67,6 +63,7 @@ local function nvim_lsp_config()
             return true
         end
     })
+
 end
 
 -- keybinds
@@ -83,7 +80,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('UserLspConfig', {}),
     callback = function(args)
         local buffer = args.buf
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
 
         -- Buffer local mappings.
         vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
@@ -108,6 +104,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
             buffer = buffer
         })
 
+        vim.keymap.set('n', '<space>df', function()
+            vim.g.format_on_save = false
+        end)
         vim.api.nvim_create_autocmd("BufWritePre", {
             group = vim.api.nvim_create_augroup(
                 "FormatModificationsOnSave",
@@ -115,17 +114,30 @@ vim.api.nvim_create_autocmd('LspAttach', {
             ),
             buffer = buffer,
             callback = function()
-                local result = require("lsp-format-modifications")
-                    .format_modifications(client, buffer)
-                -- this will fall back to format the entire buffer
-                -- if not successful, e.g. if the file is not in vc.
-                if not result.success then
-                    vim.lsp.buf.format {
-                        id = client.id,
-                        bufnr = buffer,
-                    }
+                if vim.g.format_on_save == false then
+                    return
                 end
-            end,
+                for _, client in ipairs(vim.lsp.get_active_clients({ bufnr = buffer })) do
+                    if not client.server_capabilities.documentFormattingProvider then
+                        goto continue
+                    end
+
+                    local result = require("lsp-format-modifications")
+                        .format_modifications(client, buffer)
+
+                    if not result.success then
+                        -- format the entire buffer if we're not in a git project
+                        vim.lsp.buf.format {
+                            id = client.id,
+                            bufnr = buffer,
+                        }
+                    end
+
+                    ::continue::
+                end
+
+                vim.g.format_on_save = true
+            end
         })
     end,
 })
