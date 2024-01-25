@@ -13,3 +13,8 @@ vim.opt.wrap = false
 -- editor
 vim.opt.scrolloff = 8
 vim.opt.colorcolumn = "80"
+
+-- netrw
+vim.g.netrw_banner = 0    -- disable banner
+vim.g.netrw_altv = 1      -- open splits to the right
+vim.g.netrw_liststyle = 3 -- tree view
