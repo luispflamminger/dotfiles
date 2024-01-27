@@ -64,6 +64,7 @@ local function nvim_lsp_config()
         end
     })
 
+    require 'lspconfig'.gopls.setup({})
 end
 
 -- keybinds
