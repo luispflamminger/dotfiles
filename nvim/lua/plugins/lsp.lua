@@ -117,23 +117,29 @@ vim.api.nvim_create_autocmd('LspAttach', {
                 if vim.g.format_on_save == false then
                     return
                 end
+
+                -- format buffer on save
                 for _, client in ipairs(vim.lsp.get_active_clients({ bufnr = buffer })) do
-                    if not client.server_capabilities.documentFormattingProvider then
-                        goto continue
+                    local formatted = false
+
+                    -- if the client supports document range formatting,
+                    -- try to format only modified areas
+                    if client.server_capabilities.documentRangeFormattingProvider then
+                        local result = require("lsp-format-modifications")
+                            .format_modifications(client, buffer)
+
+                        if result.success then
+                            formatted = true
+                        end
                     end
 
-                    local result = require("lsp-format-modifications")
-                        .format_modifications(client, buffer)
-
-                    if not result.success then
-                        -- format the entire buffer if we're not in a git project
+                    -- if range formatting is not supported or failed, try to format the whole buffer
+                    if formatted == false and client.server_capabilities.documentFormattingProvider then
                         vim.lsp.buf.format {
                             id = client.id,
                             bufnr = buffer,
                         }
                     end
-
-                    ::continue::
                 end
 
                 vim.g.format_on_save = true
