@@ -1,0 +1,26 @@
+add_newline = false
+format = """\
+$cmd_duration\
+$battery\
+$username@$hostname:$directory$git_branch$git_commit$git_state$character"""
+
+[directory]
+truncation_length = 10
+truncation_symbol = '…/'
+
+[username]
+show_always = true
+style_user = 'green'
+format = '[$user]($style)'
+
+[hostname]
+ssh_only = false
+style = 'green'
+format = '[$ssh_symbol$hostname]($style)'
+
+[cmd_duration]
+min_time = 20_000
+format = """took [$duration]($style)
+
+"""
+
