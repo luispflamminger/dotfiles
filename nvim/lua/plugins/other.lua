@@ -19,4 +19,19 @@ return {
             require("leap").create_default_mappings()
         end
     },
+    {
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        ft = { "markdown" },
+        build = function() vim.fn["mkdp#util#install"]() end,
+    },
+    {
+        "nvim-pack/nvim-spectre",
+        config = function()
+            require('spectre').setup()
+        end,
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+    }
 }
