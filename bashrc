@@ -4,6 +4,16 @@
 
 ### DEFAULT CONFIGURATION ###
 
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# If running on tty1, start sway
+if [ $(tty) = '/dev/tty1' ]; then
+    /usr/bin/start-sway
+fi
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
