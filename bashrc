@@ -84,7 +84,7 @@ fi
 export PATH=$PATH:/mnt/c/Program\ Files/Mozilla\ Firefox
 
 # go
-export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/usr/local/go/bin:/home/luisp/go/bin
 
 # rust binaries
 export PATH=$PATH:/home/luisp/.cargo/bin
