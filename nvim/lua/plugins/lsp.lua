@@ -24,6 +24,7 @@ local function jdtls_config()
                     java = {
                         saveActions = { organizeImports = true },
                         import = { exclusions = "target/*" },
+                        sources = { organizeImports = { starThreshold = 5, staticStarThreshold = 3 } },
                     }
                 },
                 root_dir = vim.fs.dirname(vim.fs.find({ '.git' }, { upward = true })[1]),
@@ -64,7 +65,9 @@ local function nvim_lsp_config()
         end
     })
 
-    require 'lspconfig'.gopls.setup({})
+    require('lspconfig').gopls.setup({})
+    require('lspconfig').marksman.setup({})
+    require('lspconfig').lemminx.setup({})
 end
 
 -- keybinds
@@ -149,6 +152,18 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end,
 })
 
+local function lint_config()
+    require("lint").linters_by_ft = {
+        go = { "golangcilint" },
+    }
+
+    vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
+        group = vim.api.nvim_create_augroup("LintOnSave", {}),
+        callback = function()
+            require("lint").try_lint()
+        end,
+    })
+end
 return {
     {
         "williamboman/mason.nvim",
@@ -179,5 +194,9 @@ return {
         lazy = true,
         ft = "java",
         config = jdtls_config,
+    },
+    {
+        "mfussenegger/nvim-lint",
+        config = lint_config,
     },
 }
