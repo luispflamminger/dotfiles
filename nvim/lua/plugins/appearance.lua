@@ -4,16 +4,27 @@ vim.opt.listchars = "tab:→\\x20,space:·"
 
 -- all theming related plugins
 return {
+    -- {
+    --     "folke/tokyonight.nvim",
+    --     name = "tokyonight",
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         require("tokyonight").setup({
+    --             style = "moon"
+    --         })
+    --         vim.cmd.colorscheme("tokyonight")
+    --     end,
+    -- },
     {
-        "folke/tokyonight.nvim",
-        name = "tokyonight",
-        lazy = false,
+        "ellisonleao/gruvbox.nvim",
         priority = 1000,
         config = function()
-            require("tokyonight").setup({
-                style = "moon"
+            require("gruvbox").setup({
+                transparent_mode = true,
+
             })
-            vim.cmd.colorscheme("tokyonight")
+            vim.cmd.colorscheme("gruvbox")
         end,
     },
     {
