@@ -1,0 +1,2 @@
+# this goes into ~/.config/alacritty/system.toml
+shell = "ubuntu2204.exe"

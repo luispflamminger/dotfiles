@@ -1,0 +1,4 @@
+# this goes into ~/.config/alacritty/system.toml
+[shell]
+program = "/bin/bash"
+args = [ "-l", "-c", "tmux attach || tmux" ]
