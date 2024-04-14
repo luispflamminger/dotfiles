@@ -1,2 +1,3 @@
 # this goes into %AppData%\alacritty\alacritty.toml on Windows
-import = [ "\\\\wsl.localhost\\Ubuntu-22.04\\home\\luisp\\dev\\personal\\dotfiles\\alacritty.toml" ]
+import = [ "\\\\wsl.localhost\\Ubuntu-22.04\\home\\luisp\\dev\\personal\\dotfiles\\alacritty\\alacritty.toml" ]
+shell = "ubuntu2204.exe"
