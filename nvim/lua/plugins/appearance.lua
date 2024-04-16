@@ -30,7 +30,16 @@ return {
     {
         "nvim-lualine/lualine.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
-        config = true
+        config = {
+            sections = {
+                lualine_c = {
+                    {
+                        'filename',
+                        path = 1,
+                    },
+                },
+            },
+        },
     },
     {
         -- requires a patched font (https://github.com/ryanoasis/nerd-fonts)
