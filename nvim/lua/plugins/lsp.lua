@@ -68,6 +68,7 @@ local function nvim_lsp_config()
     require('lspconfig').gopls.setup({})
     require('lspconfig').marksman.setup({})
     require('lspconfig').lemminx.setup({})
+    require('lspconfig').tsserver.setup({})
 end
 
 -- keybinds
