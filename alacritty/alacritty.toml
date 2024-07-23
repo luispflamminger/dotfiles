@@ -11,8 +11,8 @@ padding = { x = 7, y = 7 }
 
 [font]
 size = 13.0
-normal = { family = "Noto Sans Mono", style = "Regular" }
-bold = { style = "Bold" }
+normal = { family = "JetBrainsMonoNL Nerd Font", style = "Medium" }
+#bold = { style = "Bold" }
 
 # Colors (Gruvbox dark)
 [colors.primary]
