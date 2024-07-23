@@ -137,6 +137,10 @@ alias gradle-bootrun='./gradlew bootRun --args="--spring.profiles.active=dev"'
 # Set default kubeconfig path
 export KUBECONFIG=~/.kube/config
 
+# Windows Clipboard
+alias paste='powershell.exe -c Get-Clipboard'
+alias copy=clip.exe
+
 ### PROMPT ###
 
 # launch starship
