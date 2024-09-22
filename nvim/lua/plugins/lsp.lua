@@ -45,6 +45,16 @@ local function nvim_lsp_config()
         spring_boot_tools = { enable = false },
     })
     require('lspconfig').jdtls.setup({
+        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+        on_attach = function(_, _)
+            -- organize imports
+            vim.keymap.set('n', '<leader>co', function()
+                vim.lsp.buf.code_action({
+                    context = { only = { 'source.organizeImports' } },
+                    apply = true,
+                })
+            end)
+        end,
         settings = {
             java = {
                 saveActions = { organizeImports = true },
