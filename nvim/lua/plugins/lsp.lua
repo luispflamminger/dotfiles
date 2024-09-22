@@ -172,7 +172,16 @@ return {
         "williamboman/mason-lspconfig.nvim",
         name = "mason-lspconfig",
         dependencies = { "mason" },
-        config = true,
+        opts = {
+            ensure_installed = {
+                "gopls",
+                "marksman",
+                "lemminx",
+                "lua_ls",
+                "tsserver",
+                "pylsp",
+            }
+        },
     },
     {
         "nvim-java/nvim-java",
