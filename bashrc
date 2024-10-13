@@ -134,6 +134,12 @@ alias gof='firefox.exe $(git remote -v | grep -o -E "https://git[^ ]*" | tail -1
 alias mvn-bootrun='mvn spring-boot:run -Dspring-boot.run.profiles=local -Duser.timezone=Europe/Berlin -Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000"'
 alias gradle-bootrun='./gradlew bootRun --args="--spring.profiles.active=dev"'
 
+# kubectl
+alias k='kubectl'
+
+# fluxcd
+. <(flux completion bash)
+
 # Set default kubeconfig path
 export KUBECONFIG=~/.kube/config
 
