@@ -2,7 +2,7 @@
 return {
     {
         "nvim-lua/plenary.nvim",
-        name = "plenary"
+        name = "plenary",
     },
     {
         "folke/which-key.nvim",
