@@ -77,7 +77,6 @@ local function nvim_lsp_config()
     require('lspconfig').pylsp.setup({})
     require('lspconfig').marksman.setup({})
     require('lspconfig').lemminx.setup({})
-    require('lspconfig').ts_ls.setup({})
 end
 
 -- keybinds
@@ -191,7 +190,6 @@ return {
                 "marksman",
                 "lemminx",
                 "lua_ls",
-                "ts_ls",
                 "pylsp",
             }
         },
