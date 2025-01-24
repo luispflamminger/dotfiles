@@ -11,6 +11,9 @@ return {
     -- Run wsl if on windows
     default_prog = default_prog,
 
+    -- Disable default key bindings
+    disable_default_key_bindings = true,
+
     -- Hide tab bar when there's only one tab
     hide_tab_bar_if_only_one_tab = true,
 
