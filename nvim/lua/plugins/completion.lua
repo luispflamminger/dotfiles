@@ -50,11 +50,12 @@ return {
                     ['<tab>'] = cmp.mapping.confirm({ select = true }),
                 }),
                 sources = cmp.config.sources({
-                    { name = "nvim_lsp", group_index = 1 },
+                    { name = "nvim_lsp",                group_index = 1 },
                     { name = "nvim_lsp_signature_help", group_index = 1 },
-                    { name = "luasnip",  group_index = 1 },
-                    { name = "buffer",   group_index = 1 },
-                    { name = "path",     group_index = 1 },
+                    { name = "luasnip",                 group_index = 1 },
+                    { name = "render-markdown",         group_index = 1 },
+                    { name = "buffer",                  group_index = 1 },
+                    { name = "path",                    group_index = 1 },
                 }),
             })
 
@@ -84,15 +85,44 @@ return {
         dependencies = { "L3MON4D3/LuaSnip" },
     },
     {
-        "github/copilot.vim",
-        init = function()
-            vim.g.copilot_no_tab_map = true
-            vim.keymap.set('i', '<S-tab>', 'copilot#Accept("")', {
-                expr = true,
-                replace_keycodes = false
-            })
-            vim.keymap.set('i', '<C-S-N>', '<Plug>(copilot-next)')
-            vim.keymap.set('i', '<C-S-P>', '<Plug>(copilot-previous)')
-        end,
+        "zbirenbaum/copilot.lua",
+        opts = {
+            suggestion = {
+                enabled = true,
+                auto_trigger = true,
+                hide_during_completion = true,
+                keymap = {
+                    accept = "<S-tab>",
+                    accept_word = false,
+                    accept_line = false,
+                    next = "<C-S-N>",
+                    prev = "<C-S-P>",
+                    dismiss = false,
+                },
+            },
+        },
     },
+    {
+        "yetone/avante.nvim",
+        event = "VeryLazy",
+        lazy = false,
+        version = false,
+        opts = {
+            provider = "copilot",
+            file_selector = {
+                provider = "telescope",
+            },
+        },
+        build = "make",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "hrsh7th/nvim-cmp",
+            "zbirenbaum/copilot.lua",
+            "nvim-telescope/telescope.nvim",
+            "nvim-tree/nvim-web-devicons",
+            "stevearc/dressing.nvim",
+            "MunifTanjim/nui.nvim",
+            "MeanderingProgrammer/render-markdown.nvim",
+        },
+    }
 }
