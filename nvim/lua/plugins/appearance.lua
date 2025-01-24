@@ -4,29 +4,28 @@ vim.opt.listchars = "tab:→\\x20,space:·"
 
 -- all theming related plugins
 return {
-    -- {
-    --     "folke/tokyonight.nvim",
-    --     name = "tokyonight",
-    --     lazy = false,
-    --     priority = 1000,
-    --     config = function()
-    --         require("tokyonight").setup({
-    --             style = "moon"
-    --         })
-    --         vim.cmd.colorscheme("tokyonight")
-    --     end,
-    -- },
     {
-        "ellisonleao/gruvbox.nvim",
+        'ribru17/bamboo.nvim',
+        lazy = false,
         priority = 1000,
         config = function()
-            require("gruvbox").setup({
-                transparent_mode = true,
-
-            })
-            vim.cmd.colorscheme("gruvbox")
+            require('bamboo').setup {
+                transparent = false,
+            }
+            require('bamboo').load()
         end,
     },
+    --{
+    --    "ellisonleao/gruvbox.nvim",
+    --    priority = 1000,
+    --    config = function()
+    --        require("gruvbox").setup({
+    --            transparent_mode = true,
+
+    --        })
+    --        vim.cmd.colorscheme("gruvbox")
+    --    end,
+    --},
     {
         "nvim-lualine/lualine.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
