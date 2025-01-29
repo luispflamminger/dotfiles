@@ -24,10 +24,26 @@ return {
             mods = "CTRL|SHIFT",
             action = wezterm.action { PasteFrom = "Clipboard" },
         },
+        { -- zoom in
+            key = "=",
+            mods = "CTRL",
+            action = wezterm.action.IncreaseFontSize,
+        },
+        { -- zoom out
+            key = "-",
+            mods = "CTRL",
+            action = wezterm.action.DecreaseFontSize,
+        },
     },
 
     -- Hide tab bar when there's only one tab
     hide_tab_bar_if_only_one_tab = true,
+
+    -- Disable the bell
+    audible_bell = "Disabled",
+
+    -- Do not ask before closing a window
+    window_close_confirmation = "NeverPrompt",
 
     -- Window padding
     window_padding = {
