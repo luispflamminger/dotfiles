@@ -28,6 +28,7 @@ return {
             file_selector = {
                 provider = "telescope",
             },
+            hints = { enabled = false },
         },
         build = "make",
         dependencies = {
