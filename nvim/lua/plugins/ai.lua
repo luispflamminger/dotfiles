@@ -16,6 +16,12 @@ return {
                     dismiss = false,
                 },
             },
+            filetypes = {
+                [""] = false,
+                jproperties = false,
+                markdown = true,
+                gitcommit = true,
+            },
         },
     },
     {
