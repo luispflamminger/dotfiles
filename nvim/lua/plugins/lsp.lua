@@ -77,6 +77,30 @@ local function nvim_lsp_config()
     require('lspconfig').pylsp.setup({})
     require('lspconfig').marksman.setup({})
     require('lspconfig').lemminx.setup({})
+    require('lspconfig').ts_ls.setup({
+        filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+        cmd = { "typescript-language-server", "--stdio" },
+        root_dir = require('lspconfig').util.root_pattern("package.json"),
+        single_file_support = false,
+        settings = {
+            typescript = {
+                format = {
+                    tabSize = 2,
+                    indentSize = 2,
+                },
+
+            },
+            javascript = {
+                format = {
+                    tabSize = 2,
+                    indentSize = 2,
+                },
+            },
+        },
+    })
+    require('lspconfig').denols.setup({
+        root_dir = require('lspconfig').util.root_pattern("deno.json", "deno.jsonc"),
+    })
 end
 
 -- keybinds

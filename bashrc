@@ -96,9 +96,10 @@ export PATH=$PATH:/home/luisp/.cargo/bin
 export GPG_TTY=$(tty)
 
 # node version manager
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+NODE_PATH=$(nvm which node)
+export PATH="${NODE_PATH::-5}:$PATH"
 
 # default editor
 export EDITOR=nvim
@@ -112,6 +113,8 @@ export EDITOR=nvim
 # proxy settings
 . "$HOME/.bash_proxy"
 
+# secrets
+. "$HOME/.bash_secrets"
 
 ### ALIASES ###
 
@@ -131,8 +134,20 @@ alias gl='git log'
 alias gof='firefox.exe $(git remote -v | grep -o -E "https://git[^ ]*" | tail -1)'
 
 # maven and gradle run configurations
-alias mvn-bootrun='mvn spring-boot:run -Dspring-boot.run.profiles=local -Duser.timezone=Europe/Berlin -Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000"'
-alias gradle-bootrun='./gradlew bootRun --args="--spring.profiles.active=dev"'
+alias mvn-bootrun='mvn spring-boot:run -Dspring-boot.run.profiles=local -Duser.timezone=Europe/Berlin -Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000"'
+alias mvn-bootrun-suspend='mvn spring-boot:run -Dspring-boot.run.profiles=local -Duser.timezone=Europe/Berlin -Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000"'
+alias mvn-bootrun-sidecar='mvn spring-boot:run -Dspring-boot.run.profiles=sidecar -Duser.timezone=Europe/Berlin -Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000"'
+alias mvn-bootrun-default='mvn spring-boot:run -Dspring-boot.run.profiles=default -Duser.timezone=Europe/Berlin -Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000"'
+alias gradle-bootrun='./gradlew bootRun --args="--spring.profiles.active=local"'
+
+mvn-integration-test() {
+    mvn -Dit.test=$1 failsafe:integration-test
+}
+
+mvn-unit-test() {
+    mvn -Dtest=$1 test
+}
+
 
 # kubectl
 alias k='kubectl'
@@ -152,3 +167,5 @@ alias copy=clip.exe
 # launch starship
 eval "$(starship init bash)"
 
+. "/home/luisp/.deno/env"
+source /home/luisp/.local/share/bash-completion/completions/deno.bash
