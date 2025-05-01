@@ -1,0 +1,10 @@
+# Sourced on all invocations of the shell.
+# Should contain exported variables that should be available to other programs.
+
+# include ~/.local/bin
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+# include rust binaries
+export PATH=$PATH:/home/luisp/.cargo/bin

@@ -1,0 +1,55 @@
+# Sourced in interactive shells only. Should contain commands to set up
+# aliases, functions, options, key bindings, etc.
+# Currently optimized for MacOS without any proxy settings.
+
+# If running on tty1, start sway
+if [ $(tty) = '/dev/tty1' ]; then
+    /usr/bin/start-sway
+fi
+
+### SHELL SETTINGS ###
+
+# Shared history
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_FIND_NO_DUPS
+
+# Colors
+export CLICOLOR=1
+zstyle ':completion:*:default' list-colors ''
+
+# Default Editor
+export EDITOR=nvim
+#
+# Default kubeconfig path
+export KUBECONFIG=~/.kube/config
+
+### ALIASES ###
+
+# fuzzy find repos
+alias jd='cd $(find ~/dev -mindepth 1 -maxdepth 6 -type d 2>/dev/null | fzf)'
+
+# git aliases
+alias gs='git status'
+alias gl='git log'
+
+# open current git remote in firefox
+alias gof='firefox $(git remote -v | grep -o -E "https://git[^ ]*" | tail -1)'
+
+# maven and gradle run configurations
+alias mvn-bootrun='mvn spring-boot:run -Dspring-boot.run.profiles=local -Duser.timezone=Europe/Berlin -Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000"'
+alias gradle-bootrun='./gradlew bootRun --args="--spring.profiles.active=dev"'
+
+# kubectl
+alias k='kubectl'
+
+# fluxcd
+. <(flux completion zsh)
+
+### PROMPT ###
+
+# launch starship
+eval "$(starship init zsh)"
