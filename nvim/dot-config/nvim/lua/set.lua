@@ -23,3 +23,6 @@ vim.g.netrw_altv = 1      -- open splits to the right
 vim.g.markdown_fenced_languages = {
     "ts=typescript"
 }
+
+-- no swap files
+vim.opt.swapfile = false
