@@ -113,6 +113,9 @@ export EDITOR=nvim
 # proxy settings
 . "$HOME/.bash_proxy"
 
+# secrets
+. "$HOME/.bash_secrets"
+
 . "/home/luisp/.deno/env"
 source /home/luisp/.local/share/bash-completion/completions/deno.bash
 
