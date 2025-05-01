@@ -191,6 +191,7 @@ return {
                 "lemminx",
                 "lua_ls",
                 "pylsp",
+                "jdtls",
             }
         },
     },

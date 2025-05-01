@@ -1,9 +1,31 @@
 local wezterm = require 'wezterm';
 
-local os = os.getenv("OS")
+-- determine os
+if os.getenv("OS") == "LINUX" then
+    os = "linux"
+else
+    -- check for macos using uname
+    local pipe = io.popen("uname 2>&1", "r")
+    if not pipe then
+        error("failed to determine os")
+    end
+    local out = string.find(pipe:read("*a"), "Darwin")
+
+    if out ~= nil then
+        os = "macos"
+    else
+        os = "windows"
+    end
+end
+
 local default_prog
-if os ~= "LINUX" then
+if os == "windows" then
     default_prog = { "ubuntu2204.exe" }
+end
+
+local font = wezterm.font("JetBrains Mono NL")
+if os == "macos" then
+    font = wezterm.font("JetBrainsMonoNL Nerd Font")
 end
 
 return {
@@ -57,6 +79,6 @@ return {
     color_scheme = 'Gruvbox dark, pale (base16)',
 
     -- Font configuration
-    font = wezterm.font("JetBrains Mono NL"),
+    font = font,
     font_size = 13.0,
 }

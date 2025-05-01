@@ -1,0 +1,10 @@
+#!/bin/sh
+set -euo pipefail
+for dir in *; do
+  if [[ ! -d "$dir" ]] || [[ "$dir" == "disabled" ]]; then
+    # Skip if not a directory or if it's named "disabled"
+    continue
+  fi
+    echo "Stowing dotfiles from: $dir"
+    stow --dotfiles "$dir"
+done

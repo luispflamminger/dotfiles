@@ -2,6 +2,7 @@
 return {
     {
         "zbirenbaum/copilot.lua",
+        enabled = false,
         opts = {
             suggestion = {
                 enabled = true,
@@ -30,7 +31,7 @@ return {
         lazy = false,
         version = false,
         opts = {
-            provider = "copilot",
+            provider = "openai",
             file_selector = {
                 provider = "telescope",
             },
@@ -40,7 +41,7 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
             "hrsh7th/nvim-cmp",
-            "zbirenbaum/copilot.lua",
+            -- "zbirenbaum/copilot.lua",
             "nvim-telescope/telescope.nvim",
             "nvim-tree/nvim-web-devicons",
             "stevearc/dressing.nvim",
