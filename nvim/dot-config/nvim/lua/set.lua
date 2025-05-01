@@ -18,3 +18,8 @@ vim.opt.colorcolumn = "80"
 vim.g.netrw_banner = 0    -- disable banner
 vim.g.netrw_altv = 1      -- open splits to the right
 -- vim.g.netrw_liststyle = 3 -- tree view
+
+-- required for deno docs
+vim.g.markdown_fenced_languages = {
+    "ts=typescript"
+}
