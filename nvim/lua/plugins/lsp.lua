@@ -6,8 +6,8 @@ local function jdtls_config()
     local jdtls_mason_path = "/home/luisp/.local/share/nvim/mason/bin/jdtls"
     local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
     local jdtls_cache_dir = "/home/luisp/.cache/jdtls/"
-    local workspace_dir = jdtls_cache_dir .. "/workspace/" .. project_name
-    local config_dir = jdtls_cache_dir .. "/config/"
+    local workspace_dir = jdtls_cache_dir .. "workspace/" .. project_name
+    local config_dir = jdtls_cache_dir .. "config/"
 
     vim.api.nvim_create_autocmd('FileType', {
         pattern = "java",
