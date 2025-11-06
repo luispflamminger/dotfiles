@@ -234,7 +234,7 @@ return {
         "mfussenegger/nvim-jdtls",
         dependencies = { "nvim-lspconfig" },
         lazy = true,
-        ft = "java",
+        ft = { "java", "kt", "kts" },
         config = jdtls_config,
     },
     {
