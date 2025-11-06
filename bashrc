@@ -104,6 +104,12 @@ export PATH="${NODE_PATH::-5}:$PATH"
 # default editor
 export EDITOR=nvim
 
+# maven
+export M2_HOME="/usr/local/maven"
+export PATH="${M2_HOME}/bin:${PATH}"
+
+# extended kubeconfig
+export KUBECONFIG=~/.kube/config:~/.kube/config.aws:~/.kube/config.caas
 
 ### EXTERNAL CONFIGURATION ###
 
@@ -115,6 +121,9 @@ export EDITOR=nvim
 
 # secrets
 . "$HOME/.bash_secrets"
+
+# aws helpers
+. "$HOME/.bash_aws_helpers"
 
 ### ALIASES ###
 
@@ -148,15 +157,13 @@ mvn-unit-test() {
     mvn -Dtest=$1 test
 }
 
-
 # kubectl
 alias k='kubectl'
 
 # fluxcd
-. <(flux completion bash)
-
-# Set default kubeconfig path
-export KUBECONFIG=~/.kube/config
+if command -v flux &> /dev/null; then
+    . <(flux completion bash)
+fi
 
 # Windows Clipboard
 alias paste='powershell.exe -c Get-Clipboard'
@@ -169,3 +176,6 @@ eval "$(starship init bash)"
 
 . "/home/luisp/.deno/env"
 source /home/luisp/.local/share/bash-completion/completions/deno.bash
+
+# orthw
+alias orthw="bash ~/dev/work/tardis/orthw/orthw"
