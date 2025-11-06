@@ -78,7 +78,7 @@ local function nvim_lsp_config()
     require('lspconfig').marksman.setup({})
     require('lspconfig').lemminx.setup({})
     require('lspconfig').ts_ls.setup({
-        filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+        filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript", "javascriptreact", "javascript.tsx" },
         cmd = { "typescript-language-server", "--stdio" },
         root_dir = require('lspconfig').util.root_pattern("package.json"),
         single_file_support = false,
