@@ -1,23 +1,42 @@
-
 return {
+  "ThePrimeagen/harpoon",
+  branch = "harpoon2",
+  keys = {
     {
-        "ThePrimeagen/harpoon",
-        branch = "harpoon2",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope.nvim",
-        },
-        config = function()
-            local harpoon = require("harpoon")
-            harpoon.setup()
-
-            vim.keymap.set("n", "<leader>h", function() harpoon:list():add() end)
-            vim.keymap.set("n", "<C-h>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-
-            vim.keymap.set("n", "<C-j>", function() harpoon:list():select(1) end)
-            vim.keymap.set("n", "<C-k>", function() harpoon:list():select(2) end)
-            vim.keymap.set("n", "<C-l>", function() harpoon:list():select(3) end)
-            vim.keymap.set('n', '<C-;>', function() harpoon:list():select(4) end)
-        end
-    }
+      "<Space>h",
+      function()
+        require("harpoon"):list():add()
+      end,
+      desc = "Harpoon add file",
+    },
+    {
+      "<Space>H",
+      function()
+        local harpoon = require("harpoon")
+        harpoon.ui:toggle_quick_menu(harpoon:list())
+      end,
+      desc = "Harpoon menu",
+    },
+    {
+      "<Space>j",
+      function()
+        require("harpoon"):list():select(1)
+      end,
+      desc = "Harpoon file 1",
+    },
+    {
+      "<Space>k",
+      function()
+        require("harpoon"):list():select(2)
+      end,
+      desc = "Harpoon file 2",
+    },
+    {
+      "<Space>l",
+      function()
+        require("harpoon"):list():select(3)
+      end,
+      desc = "Harpoon file 3",
+    },
+  },
 }
