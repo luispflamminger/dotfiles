@@ -6,18 +6,18 @@
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
+  . /etc/bashrc
 fi
 
 # If running on tty1, start sway
 if [ $(tty) = '/dev/tty1' ]; then
-    /usr/bin/start-sway
+  /usr/bin/start-sway
 fi
 
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-      *) return;;
+*i*) ;;
+*) return ;;
 esac
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -40,19 +40,19 @@ shopt -s checkwinsize
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
+  debian_chroot=$(cat /etc/debian_chroot)
 fi
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls --color=auto'
+  #alias dir='dir --color=auto'
+  #alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
 fi
 
 # bash-completion
@@ -67,17 +67,16 @@ fi
 ### PROMPT SETTINGS ###
 # prompt settings would go here, but I'm using starship.
 
-
 ### PATH ###
 
 # include ~/bin
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
+if [ -d "$HOME/bin" ]; then
+  PATH="$HOME/bin:$PATH"
 fi
 
 # include ~/.local/bin
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
+if [ -d "$HOME/.local/bin" ]; then
+  PATH="$HOME/.local/bin:$PATH"
 fi
 
 # firefox.exe in Windows land
@@ -89,7 +88,6 @@ export PATH=$PATH:/usr/local/go/bin:/home/luisp/go/bin
 # rust binaries
 export PATH=$PATH:/home/luisp/.cargo/bin
 
-
 ### ENVIRONMENT VARIABLES ###
 
 # gpg commit signing
@@ -97,10 +95,10 @@ export GPG_TTY=$(tty)
 
 # node version manager
 if which nvm >/dev/null 2>&1; then
-    export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
-    NODE_PATH=$(nvm which node)
-    export PATH="${NODE_PATH::-5}:$PATH"
+  export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+  NODE_PATH=$(nvm which node)
+  export PATH="${NODE_PATH::-5}:$PATH"
 fi
 
 # default editor
@@ -123,17 +121,17 @@ export KUBECONFIG=~/.kube/config:~/.kube/config.aws:~/.kube/config.caas
 
 # secrets
 if [ -f "$HOME/.bash_secrets" ]; then
-    . "$HOME/.bash_secrets"
+  . "$HOME/.bash_secrets"
 fi
 
 # aws helpers
 if [ -f "$HOME/.bash_aws_helpers" ]; then
-. "$HOME/.bash_aws_helpers"
+  . "$HOME/.bash_aws_helpers"
 fi
 
 if which deno >/dev/null 2>&1; then
-    . "/home/luisp/.deno/env"
-    source /home/luisp/.local/share/bash-completion/completions/deno.bash
+  . "/home/luisp/.deno/env"
+  source /home/luisp/.local/share/bash-completion/completions/deno.bash
 fi
 
 ### ALIASES ###
@@ -161,24 +159,25 @@ alias mvn-bootrun-default='mvn spring-boot:run -Dspring-boot.run.profiles=defaul
 alias gradle-bootrun='./gradlew bootRun --args="--spring.profiles.active=local"'
 
 mvn-integration-test() {
-    mvn -Dit.test=$1 failsafe:integration-test
+  mvn -Dit.test=$1 failsafe:integration-test
 }
 
 mvn-unit-test() {
-    mvn -Dtest=$1 test
+  mvn -Dtest=$1 test
 }
 
 # kubectl
 alias k='kubectl'
 
 # fluxcd
-if command -v flux &> /dev/null; then
-. <(flux completion bash)
+if command -v flux &>/dev/null; then
+  . <(flux completion bash)
 fi
 
 # orthw
 if [ -f "$HOME/dev/work/tardis/orthw/orthw" ]; then
-alias orthw="bash $HOME/dev/work/tardis/orthw/orthw"
+  alias orthw="bash $HOME/dev/work/tardis/orthw/orthw"
+fi
 
 # Windows Clipboard
 alias paste='powershell.exe -c Get-Clipboard'
@@ -188,4 +187,3 @@ alias copy=clip.exe
 
 # launch starship
 eval "$(starship init bash)"
-
