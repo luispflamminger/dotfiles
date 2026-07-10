@@ -13,3 +13,17 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to system clip
 
 -- Paste over selection without overwriting register
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste without overwriting register" })
+
+-- Exit terminal mode with <C-\>
+vim.keymap.set("t", [[<C-\>]], [[<C-\><C-n>]], { desc = "Exit terminal mode" })
+
+-- opencode.nvim maps <Space>ot in terminal mode, which causes Neovim to wait
+-- out `timeoutlen` on every <Space> keypress to disambiguate. Mapping <Space>
+-- to itself makes it an immediate complete sequence, eliminating the delay.
+-- Tradeoff: <Space>ot no longer works from within a terminal buffer, but it
+-- remains available from normal mode.
+vim.keymap.set("t", "<Space>", "<Space>", { desc = "Pass space through in terminal", nowait = true })
+
+-- Pass <C-CR> through to the terminal process as kitty keyboard protocol sequence
+vim.keymap.set("t", "<C-CR>", "\x1b[13;5u", { desc = "Pass C-Enter to terminal" })
+vim.keymap.set("t", "\x1b[13;5u", "\x1b[13;5u", { desc = "Pass C-Enter raw to terminal" })

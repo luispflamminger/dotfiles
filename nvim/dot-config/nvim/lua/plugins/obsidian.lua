@@ -7,7 +7,6 @@ return {
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "hrsh7th/nvim-cmp",
     "nvim-telescope/telescope.nvim",
     "nvim-treesitter/nvim-treesitter",
   },
@@ -22,7 +21,7 @@ return {
       },
 
       completion = {
-        nvim_cmp = true,
+        nvim_cmp = false,
         min_chars = 2,
       },
       mappings = {
