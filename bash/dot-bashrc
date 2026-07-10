@@ -10,7 +10,7 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # If running on tty1, start sway
-if [ $(tty) = '/dev/tty1' ]; then
+if [ "$(tty)" = '/dev/tty1' ]; then
   /usr/bin/start-sway
 fi
 
