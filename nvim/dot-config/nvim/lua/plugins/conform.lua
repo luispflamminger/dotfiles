@@ -4,5 +4,10 @@ return {
     formatters_by_ft = {
       java = { "google-java-format" },
     },
+    formatters = {
+      ["google-java-format"] = {
+        prepend_args = { "--aosp" },
+      },
+    },
   },
 }

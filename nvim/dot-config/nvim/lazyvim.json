@@ -1,8 +1,7 @@
 {
   "extras": [
-    "lazyvim.plugins.extras.ai.claudecode",
-    "lazyvim.plugins.extras.ai.codeium",
-    "lazyvim.plugins.extras.editor.harpoon2"
+    "lazyvim.plugins.extras.editor.harpoon2",
+    "lazyvim.plugins.extras.lang.java"
   ],
   "install_version": 8,
   "news": {
