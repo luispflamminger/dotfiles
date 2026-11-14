@@ -22,3 +22,6 @@ if [ -d "$HOME/.cargo/bin" ]; then
 fi
 
 export PATH
+
+# age key for sops (macOS default path is ~/Library/Application Support)
+export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt"
