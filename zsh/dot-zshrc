@@ -1,11 +1,8 @@
 # Sourced in interactive shells only. Should contain commands to set up
 # aliases, functions, options, key bindings, etc.
-# Currently optimized for MacOS without any proxy settings.
 
-# If running on tty1, start sway
-if [ $(tty) = '/dev/tty1' ]; then
-    /usr/bin/start-sway
-fi
+autoload -Uz compinit
+compinit
 
 ### SHELL SETTINGS ###
 
@@ -15,6 +12,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt SHARE_HISTORY
 setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
 setopt HIST_FIND_NO_DUPS
 
 # Colors
@@ -23,11 +21,26 @@ zstyle ':completion:*:default' list-colors ''
 
 # Default Editor
 export EDITOR=nvim
-#
-# Default kubeconfig path
-export KUBECONFIG=~/.kube/config
+
+# gpg commit signing
+export GPG_TTY=$(tty)
+
+### TOOLS ###
+
+# node version manager (fnm), switches versions on cd if .node-version/.nvmrc exist
+if command -v fnm &>/dev/null; then
+  eval "$(fnm env --use-on-cd --shell zsh)"
+fi
 
 ### ALIASES ###
+
+# ls
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# grep
+alias grep='grep --color=auto'
 
 # fuzzy find repos
 alias jd='cd $(find ~/dev -mindepth 1 -maxdepth 6 -type d 2>/dev/null | fzf)'
@@ -36,18 +49,15 @@ alias jd='cd $(find ~/dev -mindepth 1 -maxdepth 6 -type d 2>/dev/null | fzf)'
 alias gs='git status'
 alias gl='git log'
 
-# open current git remote in firefox
-alias gof='firefox $(git remote -v | grep -o -E "https://git[^ ]*" | tail -1)'
+# open current git remote in the default browser
+alias gof='open $(git remote -v | grep -o -E "https://git[^ ]*" | tail -1)'
 
-# maven and gradle run configurations
-alias mvn-bootrun='mvn spring-boot:run -Dspring-boot.run.profiles=local -Duser.timezone=Europe/Berlin -Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000"'
-alias gradle-bootrun='./gradlew bootRun --args="--spring.profiles.active=dev"'
+### LOCAL OVERRIDES ###
 
-# kubectl
-alias k='kubectl'
-
-# fluxcd
-. <(flux completion zsh)
+# machine-specific settings and secrets, not tracked in this repo
+if [ -f "$HOME/.zshrc.local" ]; then
+  . "$HOME/.zshrc.local"
+fi
 
 ### PROMPT ###
 

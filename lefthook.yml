@@ -1,0 +1,7 @@
+# Git hooks for this repo. Activate once per clone with `lefthook install`.
+
+pre-commit:
+  commands:
+    gitleaks:
+      # scan only the staged changes; --redact keeps found secrets out of the output
+      run: gitleaks git --pre-commit --staged --redact --no-banner --verbose

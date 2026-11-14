@@ -1,10 +1,24 @@
 # Sourced on all invocations of the shell.
 # Should contain exported variables that should be available to other programs.
 
-# include ~/.local/bin
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
+# include ~/bin
+if [ -d "$HOME/bin" ]; then
+  PATH="$HOME/bin:$PATH"
 fi
 
-# include rust binaries
-export PATH=$PATH:/home/luisp/.cargo/bin
+# include ~/.local/bin
+if [ -d "$HOME/.local/bin" ]; then
+  PATH="$HOME/.local/bin:$PATH"
+fi
+
+# go binaries installed with `go install`
+if [ -d "$HOME/go/bin" ]; then
+  PATH="$PATH:$HOME/go/bin"
+fi
+
+# rust binaries
+if [ -d "$HOME/.cargo/bin" ]; then
+  PATH="$PATH:$HOME/.cargo/bin"
+fi
+
+export PATH

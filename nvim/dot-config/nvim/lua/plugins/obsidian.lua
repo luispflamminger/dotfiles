@@ -3,7 +3,7 @@ return {
   version = "*", -- recommended, use latest release instead of latest commit
   lazy = true,
   event = {
-    "BufReadPre /home/luisp/obsidian-notes/**.md",
+    "BufReadPre " .. vim.fn.expand("~") .. "/obsidian-notes/**.md",
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -16,7 +16,7 @@ return {
       workspaces = {
         {
           name = "notes",
-          path = "/home/luisp/obsidian-notes",
+          path = "~/obsidian-notes",
         },
       },
 
@@ -100,9 +100,9 @@ return {
         substitutions = {},
       },
 
-      -- wsl-open is needed to open links in windows default browser
+      -- open links in the default browser
       follow_url_func = function(url)
-        vim.fn.jobstart({ "wsl-open", url })
+        vim.fn.jobstart({ "open", url })
       end,
 
       -- bring obsidian to foreground when opening
