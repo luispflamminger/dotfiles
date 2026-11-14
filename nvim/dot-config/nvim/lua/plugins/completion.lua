@@ -5,7 +5,6 @@
 return {
   {
     "saghen/blink.cmp",
-    dependencies = { "saghen/blink.compat" },
     opts = {
       keymap = {
         preset = "enter",
@@ -15,26 +14,6 @@ return {
         ["<S-Tab>"] = { "select_prev", "fallback" },
         -- Enter is always a plain newline
         ["<CR>"] = { "fallback" },
-      },
-      sources = {
-        default = { "lsp", "path", "snippets", "buffer", "obsidian", "obsidian_new", "obsidian_tags" },
-        providers = {
-          obsidian = {
-            name = "obsidian",
-            module = "blink.compat.source",
-            opts = { name = "obsidian" },
-          },
-          obsidian_new = {
-            name = "obsidian_new",
-            module = "blink.compat.source",
-            opts = { name = "obsidian_new" },
-          },
-          obsidian_tags = {
-            name = "obsidian_tags",
-            module = "blink.compat.source",
-            opts = { name = "obsidian_tags" },
-          },
-        },
       },
     },
   },
