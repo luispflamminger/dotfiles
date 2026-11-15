@@ -45,6 +45,7 @@ brew "tailscale"
 ### PDF, OCR & MEDIA ###
 
 brew "exiftool"
+brew "immich-cli"
 brew "ocrmypdf"
 brew "poppler"
 brew "tesseract-lang"
