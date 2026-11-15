@@ -98,13 +98,27 @@ Apps:
 - Clone Obsidian notes to `~/obsidian-notes`
 - Claude Code / Codex: sign in
 
-## Keeping the Brewfile current
+## Installing and removing packages
+
+The `Brewfile` decides what is installed. `.zshenv` sets
+`HOMEBREW_BUNDLE_FILE` to it, so `brew bundle` finds it without `--file`.
+Change the file first, then let `brew bundle` apply it, instead of running
+`brew install` directly.
 
 ```bash
-brew bundle check --file ~/dotfiles/Brewfile      # anything missing?
-brew bundle cleanup --file ~/dotfiles/Brewfile    # anything installed but not listed?
+brew bundle add jq && brew bundle install                # formula
+brew bundle add --cask firefox && brew bundle install    # app
+brew bundle remove jq && brew bundle cleanup --force     # uninstall what's no longer listed
 ```
 
-To add everything newly installed, run
-`brew bundle dump --file - --force` and merge the new lines into the matching
-group in the `Brewfile`.
+`brew bundle add` only edits the file. It appends the entry with Homebrew's
+description as a comment, which is the format of every entry in the
+`Brewfile`. `brew bundle install` then installs anything missing and upgrades
+the rest.
+
+To check for drift, for example after a quick `brew install` to try something:
+
+```bash
+brew bundle check      # anything listed but not installed?
+brew bundle cleanup    # anything installed but not listed? (dry run, add --force to uninstall)
+```

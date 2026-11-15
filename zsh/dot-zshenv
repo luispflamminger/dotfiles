@@ -25,3 +25,6 @@ export PATH
 
 # age key for sops (macOS default path is ~/Library/Application Support)
 export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt"
+
+# default Brewfile for `brew bundle` (add, remove, install, check, cleanup)
+export HOMEBREW_BUNDLE_FILE="$HOME/dotfiles/Brewfile"
