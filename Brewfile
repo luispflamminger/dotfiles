@@ -39,6 +39,7 @@ brew "openjdk"
 
 brew "age"
 brew "restic"
+brew "rsync"
 brew "sops"
 brew "tailscale"
 
